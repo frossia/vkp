@@ -5,21 +5,28 @@ var gulp  = require('gulp'),
     browserSync = require('browser-sync').create(),
     server = require( 'gulp-develop-server' ),
     inject = require('gulp-inject'),
+    mainBowerFiles = require('main-bower-files'),
     jade = require('gulp-jade');
 
 
 
 
-gulp.task('default', ['bs'], function() {
-	gulp.watch('src/views/*.jade', ['jade']);
-  gulp.watch('src/sass/*.sass', ['sass']);
+gulp.task('default', ['mainBowerFiles', 'bs'], function() {
+	gulp.watch('src/views/**/*.jade', ['jade']);
+  gulp.watch('src/sass/**/*.sass', ['sass']);
+});
+
+
+gulp.task('mainBowerFiles', function() {
+    return gulp.src(mainBowerFiles())
+        .pipe(gulp.dest('./app/js/vendor'))
 });
 
 
 /////// Jade -> HTML
 
 gulp.task('jade', function() {
-  gulp.src('./src/views/*.jade')
+  gulp.src('./src/views/**/*.jade')
     .pipe(jade({ pretty: true }))
     .pipe(gulp.dest('./app/'))
     //.pipe(inject(gulp.src('./app/js/*.js', {read: false})))

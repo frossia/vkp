@@ -1,18 +1,22 @@
-var socket = io.connect('http://localhost:8080');
-socket.on('user', function (data) {
-  console.log(data);
 
-  $('#user').html(socket.id);
-  // $('#users').html(JSON.stringify(socket.io.connected))
-  // socket
-  // socket.emit('my other event', { my: 'data' });
-});
-socket.on('users', function (data) {
-  console.log(socket.id);
+var vkp = angular.module('vkp', [
+	'ui.router'
+])
 
-  $('#user').html(socket.id);
-  $('#users').html(JSON.stringify(data));
-  // $('#users').html(JSON.stringify(socket.io.connected))
-  // socket
-  // socket.emit('my other event', { my: 'data' });
+.config(function ($stateProvider, $urlRouterProvider) {
+
+	$urlRouterProvider.otherwise('/');
+
+	$stateProvider
+		.state('main', {
+			url: '/',
+			templateUrl: 'partials/main.html'
+			//controller: 'mainCtrl'
+		})
+		.state('login', {
+			url: '/login',
+			templateUrl: 'partials/login',
+			controller: 'loginCtrl'
+		});
+
 });
