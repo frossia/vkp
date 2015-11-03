@@ -27,7 +27,7 @@ gulp.task('mainBowerFiles', function() {
 
 gulp.task('jade', function() {
   gulp.src('./src/views/**/*.jade')
-    .pipe(jade({ pretty: true }))
+    .pipe(jade({ pretty: true }).on('error', gutil.log))
     .pipe(gulp.dest('./app/'))
     //.pipe(inject(gulp.src('./app/js/*.js', {read: false})))
     //.pipe(gulp.dest('./app'));
