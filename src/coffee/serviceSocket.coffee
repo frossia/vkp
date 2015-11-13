@@ -8,6 +8,7 @@ class Socket extends Factory
 		o = {
 
 			message: {}
+			messages: []
 
 			on: (eventName, flash, callback) ->
 				socket.on eventName, ->
@@ -24,7 +25,8 @@ class Socket extends Factory
 							if flash
 								# console.log data
 								date = new Date().toLocaleString()
-								angular.copy {eventName, data, "date": date}, o.message
+								o.messages.push {eventName, data}
+								# angular.copy {eventName, data, "date": date}, o.message
 								# o.message = {eventName, data}
 								# console.log 'messages', o.messages
 

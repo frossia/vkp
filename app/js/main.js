@@ -149,14 +149,32 @@ angular.module('vkp').controller('loginController', ['$scope', '$log', 'User', L
 var Flash, Imageonload, Load, LoginForm, NoImage;
 
 Flash = (function() {
-  function Flash($rootScope, $compile, $templateRequest, Socket) {
+  function Flash($rootScope, $compile, $templateRequest, $timeout, Socket) {
     return {
       restrict: 'E',
-      template: '<div class"fixed"></div>',
+      replace: true,
+      template: '<div class="fixed"></div>',
       link: function(scope, element, attrs) {
-        var messages;
-        messages = [];
+        var id;
         scope.message = Socket.message;
+        scope.messages = Socket.messages;
+        id = 0;
+        scope.$watchCollection('messages', function(n, o) {
+          if (n.length !== o.length) {
+            if (n.length < o.length) {
+              id--;
+              console.log('REMOVED', id);
+            } else {
+              id++;
+              console.log(id);
+              console.log('ADDED');
+              $timeout((function() {
+                scope.messages.splice(0, 1);
+              }), id * 3000);
+            }
+            return;
+          }
+        });
         scope.$watch('message', (function(n, o) {
           var animate;
           if (n !== o) {
@@ -166,10 +184,10 @@ Flash = (function() {
                 $templateRequest('partials/flashes/info.html').then(function(html) {
                   var tmpl;
                   tmpl = angular.element(html);
-                  element.children('.fixed').html(tmpl);
+                  element.append(tmpl);
                   $compile(tmpl)(scope);
-                  console.log('asdasd', element.children()[0]);
-                  animate(element.children().children());
+                  console.log('asdasd', element);
+                  animate(element.children());
                   messages.push(n);
                 });
             }
@@ -354,7 +372,7 @@ NoImage = (function() {
 
 })();
 
-angular.module('vkp').directive('flash', ['$rootScope', '$compile', '$templateRequest', 'Socket', Flash]).directive('loginForm', ['$rootScope', '$timeout', '$log', LoginForm]).directive('load', ['$rootScope', Load]).directive('imageonload', [Imageonload]).directive('noImage', [NoImage]);
+angular.module('vkp').directive('flash', ['$rootScope', '$compile', '$templateRequest', '$timeout', 'Socket', Flash]).directive('loginForm', ['$rootScope', '$timeout', '$log', LoginForm]).directive('load', ['$rootScope', Load]).directive('imageonload', [Imageonload]).directive('noImage', [NoImage]);
 
 var Audio, checkNested;
 
@@ -538,6 +556,7 @@ Socket = (function() {
     socket = io.connect(CFG.socketUrl);
     o = {
       message: {},
+      messages: [],
       on: function(eventName, flash, callback) {
         socket.on(eventName, function() {
           var args, data;
@@ -554,11 +573,10 @@ Socket = (function() {
               callback.apply(socket, args);
               if (flash) {
                 date = new Date().toLocaleString();
-                angular.copy({
+                o.messages.push({
                   eventName: eventName,
-                  data: data,
-                  "date": date
-                }, o.message);
+                  data: data
+                });
               }
             }
           });

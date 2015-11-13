@@ -6,6 +6,7 @@ Socket = (function() {
     socket = io.connect(CFG.socketUrl);
     o = {
       message: {},
+      messages: [],
       on: function(eventName, flash, callback) {
         socket.on(eventName, function() {
           var args, data;
@@ -22,11 +23,10 @@ Socket = (function() {
               callback.apply(socket, args);
               if (flash) {
                 date = new Date().toLocaleString();
-                angular.copy({
+                o.messages.push({
                   eventName: eventName,
-                  data: data,
-                  "date": date
-                }, o.message);
+                  data: data
+                });
               }
             }
           });

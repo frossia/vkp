@@ -1,14 +1,35 @@
 class Flash extends Directive
-	constructor: ($rootScope, $compile, $templateRequest, Socket) ->
+	constructor: ($rootScope, $compile, $templateRequest, $timeout, Socket) ->
 		return {
 			restrict: 'E'
-			# replace: true
-			template: '<div class"fixed"></div>'
+			replace: true
+			template: '<div class="fixed"></div>'
 			# scope:
 
 			link: (scope, element, attrs) ->
-				messages = []
+
 				scope.message = Socket.message
+				scope.messages = Socket.messages
+				id = 0
+				scope.$watchCollection 'messages', (n,o) ->
+
+					if n.length != o.length
+						if n.length < o.length
+							id--
+							console.log 'REMOVED', id
+						else
+							id++
+							console.log id
+							console.log 'ADDED'
+							$timeout (->
+								scope.messages.splice(0,1)
+								return
+							), id*3000
+						return
+
+
+					return
+
 				scope.$watch 'message', ((n, o) ->
 					if n != o
 						# scope.msg = n.eventName + ' :: ' + n.date || 'UPS......'
@@ -17,10 +38,10 @@ class Flash extends Directive
 								console.log 'newValue', n
 								$templateRequest('partials/flashes/info.html').then (html) ->
 									tmpl = angular.element html
-									element.children('.fixed').html tmpl
+									element.append tmpl
 									$compile(tmpl) scope
-									console.log 'asdasd', element.children()[0]
-									animate element.children().children()
+									console.log 'asdasd', element
+									animate element.children()
 									messages.push n
 									# console.log 'MESSAGES :: ', n
 									return
@@ -38,6 +59,7 @@ class Flash extends Directive
 
 					return
 				), true
+
 
 				return
 		}
