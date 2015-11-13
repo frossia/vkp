@@ -15,8 +15,8 @@ server.listen(8080, function(){
 var users = [];
 
 // app.get('/partials/:name', function (req, res) {
-// 	var name = req.params.name;
-// 	res.render('partials/' + name);
+//  var name = req.params.name;
+//  res.render('partials/' + name);
 // });
 
 // app.get('/', function (req, res) {
@@ -25,23 +25,36 @@ var users = [];
 
 
 io.on('connect', function (socket) {
-    var clientsCount = io.engine.clientsCount;
-    var connectedClients = Object.keys(io.sockets.connected);
-    console.log('Connecting :: ' + socket.id);
-    // var user = new User(socket.id);
-    // users.push(user);
-    console.log(io.engine.clientsCount);
-    // socket.emit('user', { 'SUCCESS!!!' });
-    io.emit('users', { users: connectedClients, usersCount: clientsCount });
-    // trtrt
-    // io.emit('update users', { users: users } );
+  var user;
+
+  socket.on('init', function (data) {
+    socket.broadcast.emit('user:new', data)
+    socket.emit('user:new', data)
+    user = data;
+  })
+
+  socket.on('test:flash', function (data) {
+    socket.emit('test:flash', 'O la la')
+  })
+
+  socket.on('logout', function (data) {
+    socket.broadcast.emit('logout', data)
+  })
+  // var clientsCount = io.engine.clientsCount;
+  // var connectedClients = Object.keys(io.sockets.connected);
+  // console.log('Connecting :: ' + socket.id);
+  // var user = new User(socket.id);
+  // users.push(user);
+  // console.log(io.engine.clientsCount);
+  // socket.emit('user', { 'SUCCESS!!!' });
+  // io.emit('users', { user: socket, users: connectedClients, usersCount: clientsCount });
+  // trtrt
+  // io.emit('update users', { users: users } );
 
 
-    // socket.on('disconnect', function () {
-    //     var pos = users.map(function(e) { return e.id; }).indexOf(socket.id);
-    //     users.splice(pos, 1);
-    //     console.log(users.map(function(e) { return e.id; }));
-    //     console.log('Disconnecting :: '+socket.id);
-    //     io.sockets.emit('update users', { users: users } );
-    // });
+  socket.on('disconnect', function () {
+    socket.broadcast.emit('logout', user);
+    // console.log('disconnecting...')
+    // socket.disconnect();
+  });
 });

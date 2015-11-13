@@ -21,6 +21,12 @@
   "dependencies": {
     "angular": "~1.4.7",
     "angular-ui-router": "~0.2.15",
-    "normalize.sass": "~3.0.0"
+    "normalize.sass": "~3.0.0",
+    "normalize.styl": "~3.0.3",
+    "gsap": "~1.18.0",
+    "angular-logger": "~1.0.2"
+  },
+  "devDependencies": {
+    "jeet-stylus": "~5.1.6"
   }
 }

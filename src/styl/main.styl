@@ -1,0 +1,60 @@
+@import '../../bower_components/normalize.styl/normalize.styl'
+@import '../../bower_components/jeet-stylus/jeet/index.styl'
+@import '../../bower_components/typographic/stylus/typographic.styl'
+@import 'variables'
+@import 'player'
+@import 'login'
+@import 'flash'
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+	display: none !important
+
+$text-selection = red
+
+// edit()
+
+
+// $line-height-ratio  = 1.75
+// $header-ratio       = $golden
+// $body-font          = $helvetica
+$body-font-weight   = 300
+// $body-color         = #666
+// $header-font        = $helvetica
+$header-font-weight = 500
+$header-color       = #111
+$min-font           = 14px
+$max-font           = 16px
+$min-width          = 600px
+$max-width          = 1000px
+$vertical-rhythm    = true
+$body-font = $segoe
+// typographic()
+
+table
+	width 100%
+	tr
+		width 100%
+	th
+
+
+	td
+		padding: 10px
+	td.undefined
+		color: red
+
+
+body
+	background: color1
+	color: white
+	max-width: 100%
+	text-shadow: rgba(0,0,0,.1) 0 0 1px
+
+input
+	color: black
+
+button, .btn
+	upcase()
+	click-shrink()
+	glossy-button: color5
+	normal()

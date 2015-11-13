@@ -1,0 +1,20 @@
+
+table
+	tr.fixed
+		th
+		th
+			select(ng-model='counter' default='{{filters[0]}}')
+				option(ng-repeat='filter in filters' value='{{"counters." + filter}}') {{Úfilter}}
+
+		th(ng-repeat='filter in filters')
+			div {{filter}}
+
+	tr(ng-repeat='friend in friends | orderBy: counter : true')
+		td: img(ng-src='{{friend.photo_100}}' title='{{friend.last_name}}::{{friend.counters.audios}}', ng-click='userInfo(friend)')
+		td {{friend.first_name}} {{friend.last_name}} :: {{friend.uid}}
+		//- br
+
+		//- td {{friend.counters.audios}}
+		//- td {{friend | json}}
+		td(ng-repeat='filter in filters' ng-class="{'undefined': !friend.counters[filter]}") {{friend.counters[filter] || 'X'}}
+

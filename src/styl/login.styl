@@ -1,0 +1,92 @@
+.login-wrap
+	height: 100%
+	width: 100%
+	background-image: radial-gradient(lighten(color1, 2%), darken(color1, 15%))
+
+.login
+	// height: 100%
+	center(100px)
+	width: 100px
+	// vertically-align()
+	align($direction: both)
+	margin-top: -50px
+
+	#ufo
+		center()
+
+	.login_btn, #login_btn
+		cursor: pointer
+		span
+			padding-top: 20px
+			display: block
+			// width: 100%
+			text-align: center
+			transition: all 0.4s
+
+		#eyes
+			transition: all 0.3s ease-in-out
+			opacity: 0
+			fill: color1
+
+		&:hover
+			#man
+				// fill: color3
+			circle
+				stroke: color5
+
+			path#eyes
+				fill: color1
+				opacity: 1
+
+	#pre_login
+		position: absolute
+
+	#after_login
+		// display: none
+		position: absolute
+
+		svg#circle
+			position: absolute
+			fill: transparent
+			overflow: visible
+			circle
+				stroke-width: 5
+
+		img
+			border-radius: 50%
+
+
+	#data
+		center()
+		position: absolute
+		margin-top: 120px
+		margin-left: -75px
+		width: 250px
+		text-align: center
+
+
+	.loading
+		display: flex
+		justify-content: center
+		align-items: center
+		flex-direction: column
+
+		img
+			height: 100px
+			width: 100px
+			border-radius: 50%
+			box-shadow: 0 0 0 5px color5
+
+#loading
+	height: 80
+	width: 80
+
+	circle
+		// transform: 'rotate(-45 40 40)',
+		// stroke-dasharray: 225
+		// stroke-dashoffset: 100
+		// transform: 'rotate(-45 40 40)'
+		transition: stroke-width 2s
+
+		// &:hover
+		 //  stroke-dashoffset: 0

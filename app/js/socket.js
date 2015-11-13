@@ -1,18 +1,22 @@
-var socket = io.connect('http://localhost:8080');
-socket.on('user', function (data) {
-  console.log(data);
+var socket = io.connect('http://playerx.dev:8080');;
+socket.io.close();
 
-  $('#user').html(socket.id);
-  // $('#users').html(JSON.stringify(socket.io.connected))
-  // socket
-  // socket.emit('my other event', { my: 'data' });
-});
-socket.on('users', function (data) {
-  console.log(socket.id);
+// function socketOptions(socket) {
 
-  $('#user').html(socket.id);
-  $('#users').html(JSON.stringify(data));
-  // $('#users').html(JSON.stringify(socket.io.connected))
-  // socket
-  // socket.emit('my other event', { my: 'data' });
-});
+//   if (socket !== undefined) {
+
+    socket.on('user', function (data) {
+      console.log(data);
+
+      $('#user').html(socket.id);
+    });
+
+    socket.on('login', function (data) {
+      console.log('New user: ' + data.last_name );
+    });
+
+ 
+
+  // }
+
+// };

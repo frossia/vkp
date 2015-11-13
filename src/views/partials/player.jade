@@ -1,14 +1,32 @@
-.wrap
-	#user
-		div 
-			img(ng-src="{{userInfo.photo_100}}")
-		.fio 
-			span.ln {{userInfo.last_name}}
-			br
-			span.fn {{userInfo.first_name}}
-		//- .user {{userInfo.photo_50}}
+flash
 
+nav#side
+	a.btn(ng-click='addFlash()') addFlash
 
-	//- button(ng-click="logout()") logout
+nav#top
+	#user-info
+		span {{user.first_name}} {{user.last_name | uppercase}}
+		img(ng-src='{{user.photo_50}}')
+		button(ng-click="logout()") Logout
+br
+br
+.loadingPercent(load='' loading-percent='loadingPercent')
+
+//- div(ng-repeat='friend in friends')
+//- 	span: img(ng-src='{{friend.photo_50}}' title='{{friend.last_name}}::{{friend.counters.audios}}')
+
+//- #users
+	a(ng-repeat='friend in friends' href='#' ng-click='getFriendSongs(friend)')
+		img(ng-src='{{friend.photo_50}}' title='{{friend.last_name}}::{{friend.counters.audios}}')
+
+#songs
+	//- .song(ng-repeat='song in songs')
+	.song(ng-repeat='song in songs' no-image='{{song.noImage ? true : false}}' hash='{{song.$$hashKey}}')
+
+		img(ng-if='!song.noImage' ng-src='{{song.image}}' imageonload='')
+		.overlay
+			//- p {{song.$$hashKey}}
+			//- span {{song.noImage}}
+			p {{song.artist}} -- {{song.title}} ({{song.test}})
 
 

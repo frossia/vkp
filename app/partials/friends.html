@@ -1,0 +1,19 @@
+
+<table>
+  <tr class="fixed">
+    <th></th>
+    <th>
+      <select ng-model="counter" default="{{filters[0]}}">
+        <option ng-repeat="filter in filters" value="{{&quot;counters.&quot; + filter}}">{{Úfilter}}</option>
+      </select>
+    </th>
+    <th ng-repeat="filter in filters">
+      <div>{{filter}}</div>
+    </th>
+  </tr>
+  <tr ng-repeat="friend in friends | orderBy: counter : true">
+    <td><img ng-src="{{friend.photo_100}}" title="{{friend.last_name}}::{{friend.counters.audios}}" ng-click="userInfo(friend)"/></td>
+    <td>{{friend.first_name}} {{friend.last_name}} :: {{friend.uid}}</td>
+    <td ng-repeat="filter in filters" ng-class="{'undefined': !friend.counters[filter]}">{{friend.counters[filter] || 'X'}}</td>
+  </tr>
+</table>

@@ -2,21 +2,15 @@
 <html ng-app="vkp">
   <head>
     <title>Develop</title>
-    <link href="css/app.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet"/>
     <script src="//vk.com/js/api/openapi.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <script src="js/vendor/TweenMax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/snap.svg/0.4.1/snap.svg-min.js"></script>
+    <script src="http://playerx.dev:8080/socket.io/socket.io.js"></script>
     <script src="js/vendor/angular.js"></script>
     <script src="js/vendor/angular-ui-router.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/vendor/angular-logger.min.js"></script>
   </head>
-  <body>
-    <div ng-controller="mainCtrl">
-      
-      <div ui-view></div>			
-    </div>
-  </body>
+  <body ng-cloak=""><div ui-view></div></body>
 </html>

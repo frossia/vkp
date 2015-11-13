@@ -1,0 +1,22 @@
+
+<div>
+  <div id="pre_login"><a id="login_btn" ng-click="login()">
+      <svg id="ufo" width="106" height="106" viewbox="0 0 106 106" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(3 3)" fill="none" fill-rule="evenodd">
+          <path id="man" d="M61.8193 55.31364C76.76293 27.0923 65.78036 12 50.0002 12 33.909 12 23.19668 27.6716 38.18106 55.31364c5.0566 9.32808 1.83834 14.7368-8.81772 17.1988-10.88573 2.51468-11.1763 6.9723-11.1763 17.4037 0 0 13.24927 10.17856 31.40514 10.17856s30.3095-9.16615 30.3095-9.16615c0-10.4316.15055-15.83132-10.73662-18.4161-10.89015-2.51616-12.25514-7.92727-7.34575-17.1988z" fill="#2ECC71"></path>
+          <circle stroke="#2ECC71" stroke-width="3" cx="50" cy="50" r="50"></circle>
+          <path id="eyes" d="M37.88173 39.17798c4.16252 4.05624 10.59255 4.25146 10.59255 4.25146s0-7.3601-4.32508-10.97743c-4.3251-3.61732-9.83514-3.74276-9.83514-3.74276s-.31163 6.68848 3.56767 10.46874zM62.09875 39.17798c-4.16252 4.05624-10.59255 4.25146-10.59255 4.25146s0-7.3601 4.32508-10.97743c4.32508-3.61732 9.83513-3.74276 9.83513-3.74276s.31165 6.68848-3.56765 10.46874z" fill="#000"></path>
+        </g>
+      </svg></a></div>
+  <div id="after_login" ng-show="user">
+    <div id="user_avatar">
+      <svg id="circle" width="106" height="106" viewbox="0 0 106 106" xmlns="http://www.w3.org/2000/svg">
+        <circle stroke="#2ECC71" stroke-width="3" cx="50" cy="50" r="50"></circle>
+      </svg><img ng-src="{{user.photo_100}}"/>
+    </div>
+  </div>
+  <div id="data" ng-show="user">
+    <h1 id="audio_counts">{{songsToLoad}}</h1>
+    <h2>asda asda adas</h2>
+  </div>
+</div>

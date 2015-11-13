@@ -1,0 +1,60 @@
+.login
+	height: 100%
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-direction: column
+	background-image: radial-gradient($color1, darken($color1, 5%))
+
+	.login-btn
+		cursor: pointer
+		span
+			display: block
+			width: 100%
+			text-align: center
+			transition: all 0.4s
+
+		#man
+			transition: all 0.3s ease-in-out
+			fill: $color5
+
+		#eyes
+			transition: all 0.3s ease-in-out
+			opacity: 0
+			fill: $color1
+
+		&:hover
+			#man
+				// fill: $color3
+			circle
+				stroke: $color5
+
+			path#eyes
+				fill: $color1
+				opacity: 1
+
+	.loading
+		display: flex
+		justify-content: center
+		align-items: center
+		flex-direction: column
+
+		img
+			height: 100px
+			width: 100px
+			border-radius: 50%
+			box-shadow: 0 0 0 5px $color5
+
+#loading
+	height: 80
+	width: 80
+
+	circle
+		// transform: 'rotate(-45 40 40)',
+		// stroke-dasharray: 225
+		// stroke-dashoffset: 100
+		// transform: 'rotate(-45 40 40)'
+		transition: stroke-width 2s
+
+		// &:hover
+		 //  stroke-dashoffset: 0

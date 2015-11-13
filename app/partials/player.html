@@ -1,9 +1,16 @@
 
-<div class="wrap">
-  <div id="user">
-    <div> <img ng-src="{{userInfo.photo_100}}"/></div>
-    <div class="fio"> <span class="ln">{{userInfo.last_name}}</span><br/><span class="fn">{{userInfo.first_name}}</span></div>
-    
+<flash></flash>
+<nav id="side"><a ng-click="addFlash()" class="btn">addFlash</a></nav>
+<nav id="top">
+  <div id="user-info"><span>{{user.first_name}} {{user.last_name | uppercase}}</span><img ng-src="{{user.photo_50}}"/>
+    <button ng-click="logout()">Logout</button>
   </div>
-  
+</nav><br/><br/>
+<div load="" loading-percent="loadingPercent" class="loadingPercent"></div>
+<div id="songs">
+  <div ng-repeat="song in songs" no-image="{{song.noImage ? true : false}}" hash="{{song.$$hashKey}}" class="song"><img ng-if="!song.noImage" ng-src="{{song.image}}" imageonload=""/>
+    <div class="overlay">
+      <p>{{song.artist}} -- {{song.title}} ({{song.test}})</p>
+    </div>
+  </div>
 </div>

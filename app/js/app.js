@@ -1,3 +1,6 @@
+// document.addEventListener("DOMContentLoaded", function(event) { 
+
+// });
 
 var vkp = angular.module('vkp', [
 	'ui.router'
@@ -18,7 +21,6 @@ var vkp = angular.module('vkp', [
 		})
 		.state('login', {
 			url: '/',
-			// resolve: { resolving: checkLogin },
 			templateUrl: 'partials/login.html',
 			controller: 'loginCtrl'
 		});
@@ -29,17 +31,15 @@ var vkp = angular.module('vkp', [
 
 
 
-vkp.run(['$state', '$log', '$rootScope', 'User', function($state, $log, $rootScope, User) {
+vkp.run(['$state', '$log', '$rootScope', '$timeout', 'User', function($state, $log, $rootScope, $timeout, User) {
   $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-			
 		if (toState.name === 'login') {
 			User.checkLogin().then( function (res) {
-				// $state.resolve = User.getUser
 				$state.go('player');
 			})
 		} else if (toState.name === 'player') {
 			User.checkLogin().then( null , function (err) {
-				$state.go('login');
+				$state.go('login');	
 			})
 		}; 	
 
